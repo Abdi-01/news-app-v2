@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { URLAPI, apiKey } from '../../helper'
 import HeaderComp from '../components/header';
 import Post from '../components/post';
@@ -39,13 +39,22 @@ class Home extends React.Component {
             console.log(error)
         }
     }
+
     // print postingan
+    renderPost = () => {
+        return this.state.news.map((value, index) => {
+            return <Post berita={value} key={index} />
+        })
+    }
+
     render() {
         console.log("state news =========>", this.state.news)
         return (
             <View style={{ backgroundColor: 'gray', flex: 1 }}>
                 <HeaderComp />
-                <Post author="Abdi"/>
+                <ScrollView>
+                    {this.renderPost()}
+                </ScrollView>
             </View>
         );
     }
